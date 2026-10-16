@@ -10,6 +10,7 @@ import PredictionCard from "../components/PredictionCard";
 import LoadingPrediction from "../components/LoadingPrediction";
 import Footer from "../components/Footer";
 import { useParams } from "react-router-dom";
+import.meta.env.VITE_API_URL
 
 export default function Dashboard() {
 
@@ -88,7 +89,7 @@ export default function Dashboard() {
         try {
 
             const response = await axios.get(
-                `http://localhost:8000/stocks/${stock.symbol}/predict-lstm/1`
+                `${import.meta.env.VITE_API_URL}/stocks/${stock.symbol}/predict-lstm/1`
             );
 
             setPrediction(response.data.predictions[0]);
@@ -115,7 +116,7 @@ export default function Dashboard() {
         try {
 
             const response = await axios.get(
-                `http://localhost:8000/stocks/${stock.symbol}/predict-lstm/30`
+                `${import.meta.env.VITE_API_URL}/stocks/${stock.symbol}/predict-lstm/30`
             );
 
             setPrediction(response.data.predictions);

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import TrendingList from "../components/TrendingList";
 import Navbar from "../components/Navbar";
+import.meta.env.VITE_API_URL
 
 function Trending() {
 
@@ -10,7 +11,7 @@ function Trending() {
     useEffect(() => {
 
         axios
-            .get("http://localhost:8000/stocks/trending")
+            .get(import.meta.env.VITE_API_URL + "/stocks/trending")
             .then((res) => setData(res.data))
             .catch(console.error);
 
