@@ -10,6 +10,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "https://stock-prediction-mocha.vercel.app",
         "http://localhost:5173",
     ],
     allow_credentials=True,
@@ -23,5 +24,5 @@ app.include_router(stock_router)
 @app.get("/")
 def root():
     return {
-        "message": "Stock Prediction API Running 🚀"
+        "message":"Hi world!"
     }
