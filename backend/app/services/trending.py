@@ -89,23 +89,23 @@ def get_screener(scr_id):
 
 
 def get_trending_stocks():
+    try:
+        now = time.time()
 
-    now = time.time()
+        if CACHE["data"] and now < CACHE["expires"]:
+            return CACHE["data"]
 
-    if CACHE["data"] and now < CACHE["expires"]:
-        return CACHE["data"]
+        data = {
+            "gainers": get_screener("day_gainers"),
+            "losers": get_screener("day_losers"),
+            "active": get_screener("most_actives")
+        }
 
-    data = {
+        CACHE["data"] = data
+        CACHE["expires"] = now + 120
 
-        "gainers": get_screener("day_gainers"),
+        return data
 
-        "losers": get_screener("day_losers"),
-
-        "active": get_screener("most_actives")
-
-    }
-
-    CACHE["data"] = data
-    CACHE["expires"] = now + 120      # 2 minutes
-
-    return data
+    except Exception as e:
+        print("TRENDING ERROR:", repr(e), flush=True)
+        raise
